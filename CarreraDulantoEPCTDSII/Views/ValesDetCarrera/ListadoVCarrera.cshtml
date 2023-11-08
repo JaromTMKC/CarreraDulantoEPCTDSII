@@ -1,0 +1,83 @@
+﻿@model IEnumerable<CarreraDulantoEPCTDSII.Models.Entidades.ValesDetCarrera>
+@using CarreraDulantoEPCTDSII.Controllers;
+
+@{
+    ValesDetCarreraController objVales = new ValesDetCarreraController();
+}
+
+<br>
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-info card-outline">
+                    <div class="card-header">
+                        <h3 class="card-title">
+                            <span class="text-dark">
+                                <i class="nav-icon fas fa-list">
+                                </i>
+                            </span>
+                            Detalles de Venta
+                        </h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-3">
+                                <a class="btn btn-success btn-sm" role="button" asp-action="Create" asp-controller="ValesDetCarrera">
+                                    <i class="fa fa-plus text-white"></i>
+                                </a>
+                            </div>
+                            <div class="col-4">
+                            </div>
+                            <div class="col-5">
+                            </div>
+                        </div>
+                        <table class="table table-hover table-bordered table-sm">
+                            <thead>
+                                <tr class="table-info">
+                                    <th><center><strong>ID</strong></center></th>
+                                    <th><center><strong>Fecha de Registro</strong></center></th>
+                                    <th><center><strong>Proveedor</strong></center></th>
+                                    <th><center><strong>Articulo</strong></center></th>
+                                    <th><center><strong>UM</strong></center></th>
+                                    <th><center><strong>Cantidad</strong></center></th>
+                                    <th><center><strong>Precio</strong></center></th>
+                                    <th><center><strong>Total</strong></center></th>
+                                    <th><center><strong>Estado</strong></center></th>
+                                    <th><center><strong>Opciones</strong></center></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td align="center">@item.IdValesDet</td>
+                                        <td align="center">@item.ValesCab.FechaRegistro</td>
+                                        <td align="center">@item.ValesCab.Proveedor</td>
+                                        <td align="center">@item.Articulo.Nombre</td>
+                                        <td align="center">@item.Articulo.UM</td>
+                                        <td align="center">@item.Cantidad</td>
+                                        <td align="center">@item.Precio</td>
+                                        <td align="center">@item.Total</td>
+                                        <td align="center">@(objVales.Estado(item.Total))</td>
+                                        <td align="center">
+                                            <a class="btn btn-info btn-sm" role="button" asp-action="Edit" asp-controller="ValesDetCarrera" asp-route-id="@item.IdValesDet">
+                                                <i class="far fa-edit text-white"></i>
+                                            </a>
+                                            <a class="btn btn-warning btn-sm" role="button" asp-action="Detail" asp-controller="ValesDetCarrera" asp-route-id="@item.IdValesDet">
+                                                <i class="fa fa-eye text-white"></i>
+                                            </a>
+                                            <button class="btn btn-danger btn-sm delete-valesdet" data-idvalesdet="@item.IdValesDet" data-cantidad="@item.Cantidad">
+                                                <i class="fa fa-trash text-white"></i>
+                                            </button>
+                                        </td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
